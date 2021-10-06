@@ -58,7 +58,7 @@ namespace A2LEngine
             foreach (string measurementStr in Helpers.GetFirstInstanceTextBetween(data, M_ST_START, M_ST_END))
             {
                 Measurement measVar = new Measurement();
-                string[] strSplt = measurementStr.Cleanup().Split('\n');
+                string[] strSplt = measurementStr.FixFirstRowDescription().Cleanup().Split('\n');
                 measVar.Name = strSplt[0].Trim();
                 measVar.Description = strSplt[1].Cleanup();
                 measVar.DataType = strSplt[2].Cleanup().ToEnum<DataType>();
@@ -87,7 +87,7 @@ namespace A2LEngine
             foreach (string calibrationStr in GetFirstInstanceTextBetween(data, C_ST_START, C_ST_END))
             {
                 Calibration calib = new Calibration();
-                string[] strSplt = calibrationStr.Cleanup().Split('\n');
+                string[] strSplt = calibrationStr.FixFirstRowDescription().Cleanup().Split('\n');
                 calib.Name = strSplt[0].Cleanup();
                 calib.Description = strSplt[1].Cleanup();
                 calib.Type = strSplt[2].Cleanup().ToEnum<CalibrationType>();
@@ -116,7 +116,7 @@ namespace A2LEngine
             foreach (string axisDesStr in GetFirstInstanceTextBetween(data, AXD_ST_START, AXD_ST_END))
             {
                 AxisDescriptor axisDes = new AxisDescriptor();
-                string[] strSplt = axisDesStr.Cleanup().Split('\n');
+                string[] strSplt = axisDesStr.FixFirstRowDescription().Cleanup().Split('\n');
                 axisDes.Type = strSplt[0].Cleanup().ToEnum<AxisDescriptionType>();
                 var measurementRefIndex = MeasurementRef.IndexOf(strSplt[1].Cleanup());
                 if (measurementRefIndex != -1) axisDes.ReferenceMeasurement = A2LCollection.Measurements[measurementRefIndex];
@@ -147,7 +147,7 @@ namespace A2LEngine
             foreach(string compuMethodStr in GetFirstInstanceTextBetween(data, CM_ST_START, CM_ST_END))
             {
                 CompuMethod compMet = new CompuMethod();
-                string[] strSplt = compuMethodStr.Cleanup().Split('\n');
+                string[] strSplt = compuMethodStr.FixFirstRowDescription().Cleanup().Split('\n');
                 compMet.Name = strSplt[0].Cleanup();
                 compMet.Description = strSplt[1].Cleanup();
                 compMet.Type = strSplt[2].Cleanup().ToEnum<CompuMethodType>();
@@ -172,7 +172,7 @@ namespace A2LEngine
             foreach (string compuMethodVTabStr in GetFirstInstanceTextBetween(data, CMV_ST_START, CMV_ST_END))
             {
                 CompuTable table = new CompuTable();
-                string[] strSplt = compuMethodVTabStr.Cleanup().Split('\n');
+                string[] strSplt = compuMethodVTabStr.FixFirstRowDescription().Cleanup().Split('\n');
                 table.Name = strSplt[0].Cleanup();
                 table.Description = strSplt[1].Cleanup();
                 table.Type = strSplt[2].Cleanup().ToEnum<CompuMethodType>();
