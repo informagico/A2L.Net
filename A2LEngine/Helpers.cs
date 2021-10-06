@@ -31,6 +31,16 @@ namespace A2LEngine
 
         }
 
+        public static string FixFirstRowDescription(this string value)
+		{
+            if (value.Split('\n')[0].Contains("\""))
+            {
+                var regex = new Regex(Regex.Escape("\""));
+                return regex.Replace(value, "\n\"", 1);
+            }
+
+            return value;
+        }
 
         public static string Cleanup(this string value)
         {
